@@ -50,8 +50,7 @@ end
       puts "#{@current_player.name}'s turn: Pick a cell number from the map"
        
        while choice.between?(1, 9) == false
-         puts "Type a number between 1 and 9"
-         choice = gets.chomp.to_i
+         raise "Type a number between 1 and 9"
        end
        choice - 1
     end
@@ -68,7 +67,7 @@ end
       end
       cells[move] = @current_player.shape
       @current_player.cells_selected << move
-     puts show_board
+      puts show_board
       check_end_game
       switch_player
     end
