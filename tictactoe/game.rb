@@ -46,9 +46,8 @@ end
     end
 
     # This method converts the input from the user into a zero-indexed number
-    def player_choice
-       puts "#{@current_player.name}'s turn: Pick a cell number from the map"
-       choice = gets.chomp.to_i
+    def player_choice(choice = gets.chomp.to_i)
+      puts "#{@current_player.name}'s turn: Pick a cell number from the map"
        
        while choice.between?(1, 9) == false
          puts "Type a number between 1 and 9"
