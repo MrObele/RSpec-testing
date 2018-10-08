@@ -6,10 +6,8 @@ class Game
 
     def initialize 
         @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-        puts "Player 1, you are X. Enter your name"
-        @player1 = Player.new(gets.chomp, "X")
-        puts "Player 2, you are O. Enter your name"
-        @player2 = Player.new(gets.chomp, "O")
+        @player1 = Player.new("Player1", "X")
+        @player2 = Player.new("Player2", "O")
         @current_player = @player1
         @end_game = false
     end
