@@ -21,11 +21,6 @@ class Game
    end
 
 
-
-   
-
-
-
 #   This Method switches turn between the two players
   def switch_player
 
@@ -35,16 +30,11 @@ class Game
 
 
 # This method displays the game board's current status
-    def show_board
-      puts "Current Status"
-      puts ""
-      
-      puts "#{cells[0]}  | #{cells[1]}  |  #{cells[2]}"
-      puts "------------"
-      puts "#{cells[3]}  | #{cells[4]}  |  #{cells[5]}"
-      puts "------------"
-      puts "#{cells[6]}  | #{cells[7]}  |  #{cells[8]}"
-    end
+def show_board
+  puts "Current Status"
+  puts ""
+  return "#{cells[0]}  | #{cells[1]}  |  #{cells[2]}" + "\n" + "------------" + "\n" + "#{cells[3]}  | #{cells[4]}  |  #{cells[5]}" + "\n" + "------------" + "\n" + "#{cells[6]}  | #{cells[7]}  |  #{cells[8]}"
+end
 
     #  This method displays the map for the game to correspond to number units
     def game_map
@@ -79,7 +69,7 @@ class Game
       end
       cells[move] = @current_player.shape
       @current_player.cells_selected << move
-      show_board
+     puts show_board
       check_end_game
       switch_player
     end
