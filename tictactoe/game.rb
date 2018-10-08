@@ -1,13 +1,13 @@
-require './player'
+require_relative 'player'
 
 # This class generates the game environment and initializes the Player instances from the Player class
 class Game
     attr_accessor :cells, :end_game
 
-    def initialize 
+    def initialize
         @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-        @player1 = Player.new("Player1", "X")
-        @player2 = Player.new("Player2", "O")
+        @player1 = Player.new("david", "X")
+        @player2 = Player.new("chibuzor", "O")
         @current_player = @player1
         @end_game = false
     end
@@ -24,7 +24,6 @@ class Game
 
    
 
-protected
 
 
 #   This Method switches turn between the two players
@@ -110,6 +109,4 @@ protected
    
 end
 
-game = Game.new
-game.play
 
