@@ -1,7 +1,7 @@
 require './tictactoe/game'
 
 describe Game do
-  game = Game.new
+ 
   before(:all) do
     @player1 = Player.new("david", "X")
     @player2 = Player.new("chibuzor", "O")
@@ -10,11 +10,13 @@ describe Game do
   end
 
    describe "#switch_player" do
+   game = Game.new
     it "should change to player2 if current player is player1" do 
       expect(game.switch_player.name).to eql(@player2.name)
     end
   end
   describe "#show_board" do
+  game = Game.new
     it "should change the current state of a board box" do 
       @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
       expect(game.show_board).to eql("   |    |   " + "\n" + "------------" + "\n" + "   |    |   " + "\n" + "------------" + "\n" + "   |    |   ")
@@ -26,16 +28,6 @@ describe Game do
     # end
   end
 
-  describe "#player_choice" do
-    it "it should convert the number from the user and return the number - 1" do 
-      expect(game.player_choice(9)).to eql(8)
-    end
-
-    it "throw exception when the user tries to supply a number outside the range 1 to 9" do 
-      expect{game.player_choice(12)}.to raise_error("Type a number between 1 and 9")
-    end
-  end
-
   before do
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     @player1 = Player.new("david", "X")
@@ -43,11 +35,24 @@ describe Game do
     @current_player = @player1
     @end_game = false
   end
-  describe "#player_select" do
-  playerchoice = game.player_choice(9)
-    it "it should convert the number from the user and return the number - 1" do 
-      
-      expect(@cell[playerchoice]).to eql("X")
+  describe "#player_choice" do
+
+     game = Game.new
+    it "throw exception when the user tries to supply a number outside the range 1 to 9" do 
+      expect{game.player_choice(12)}.to raise_error("Type a number between 1 and 9")
     end
+    it "Assigns the current player's shape to the specified cell" do 
+
+      expect(game.player_choice(9)).to eql(@current_player.shape)
+    end
+    it "throw exception if the current cell chosen is already occupied" do 
+      expect{game.player_choice(9)}.to raise_error("This cell has been chosen, Please select another cell")
+    end
+    it "Add the given number -1 into the current player selected cells array " do 
+      game.player_choice(7)
+      expect(@player2.cells_selected).to eql([6])
+    end
+
   end
+
 end

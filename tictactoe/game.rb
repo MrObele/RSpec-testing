@@ -16,7 +16,11 @@ class Game
    # This is the method that plays the game.
    def play
       while end_game == false do
-        player_select
+        game_map
+        player_choice
+        puts show_board
+        check_end_game
+        switch_player
       end
    end
 
@@ -46,32 +50,26 @@ end
     end
 
     # This method converts the input from the user into a zero-indexed number
+   
     def player_choice(choice = gets.chomp.to_i)
       puts "#{@current_player.name}'s turn: Pick a cell number from the map"
-       
-       while choice.between?(1, 9) == false
-         raise "Type a number between 1 and 9"
-       end
-       choice - 1
-    end
+      while choice.between?(1, 9) == false
+        raise "Type a number between 1 and 9"
 
-
-    # This method edits the game board to show the options chosen by the users
-    def player_select
-      game_map
-      move = player_choice
-
-      while cells[move] != " "
-        puts "This cell has been chosen, Please select another cell"
-        move = player_choice
       end
-      cells[move] = @current_player.shape
-      @current_player.cells_selected << move
-      puts show_board
-      check_end_game
-      switch_player
+     
+     move = choice - 1
+
+     while cells[move] != " "
+      raise "This cell has been chosen, Please select another cell"
+      player_choice
     end
-    
+    @current_player.cells_selected << move
+    @cells[move] = @current_player.shape
+     
+   end
+
+
 #  This method checks whether or not there is a winner or the game is a draw
     def check_end_game
       
@@ -96,5 +94,4 @@ end
 
    
 end
-
 
