@@ -87,8 +87,9 @@ end
         end
         
       end
+      
       if ((player1_cell.length + player2_cell.length) == 9)
-
+        
         puts "It's a draw!"
         @end_game = true
         return end_game

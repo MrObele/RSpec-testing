@@ -72,9 +72,9 @@ describe Game do
       expect(game.check_end_game([2, 1, 0], [2, 1, 0], [3, 4, 9])).to be true
     end
 
-
    it "should end when there is no more space to play" do 
-    expect(game.check_end_game([0, 2, 5, 6, 8], [0, 2, 5, 6, 8], [1, 3, 4, 7])).to be true
+    game = Game.new
+    expect(game.check_end_game([0, 2, 5, 6], [0, 2, 5, 6], [1, 3, 4, 7, 8])).to be true
    end
   end
 end
