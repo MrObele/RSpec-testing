@@ -48,11 +48,33 @@ describe Game do
     it "throw exception if the current cell chosen is already occupied" do 
       expect{game.player_choice(9)}.to raise_error("This cell has been chosen, Please select another cell")
     end
-    it "Add the given number -1 into the current player selected cells array " do 
-      game.player_choice(7)
-      expect(@player2.cells_selected).to eql([6])
-    end
-
   end
 
+
+  describe "#updates_player_cells" do
+  game = Game.new
+  it "Add the given number into the current player selected cells array " do 
+    expect(game.updates_player_cells(6)).to eql([6])
+  end
+  it "Add the given number into the current player selected cells array " do 
+    expect(game.updates_player_cells(7)).to eql([6, 7])
+  end
+
+  it "Add the given number into the current player selected cells array " do 
+    expect(game.updates_player_cells(0)).to eql([6, 7, 0])
+  end
+ end
+
+ describe "#updates_player_cells" do
+  game = Game.new
+
+    it "should end the game when there is a winning condition" do 
+      expect(game.check_end_game([2, 1, 0], [2, 1, 0], [3, 4, 9])).to be true
+    end
+
+
+   it "should end when there is no more space to play" do 
+    expect(game.check_end_game([0, 2, 5, 6, 8], [0, 2, 5, 6, 8], [1, 3, 4, 7])).to be true
+   end
+  end
 end

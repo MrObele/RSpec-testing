@@ -19,7 +19,7 @@ class Game
         game_map
         player_choice
         puts show_board
-        check_end_game
+        check_end_game(@current_player.cells_selected, @player1.cells_selected, @player2.cells_selected)
         switch_player
       end
    end
@@ -49,7 +49,7 @@ end
         puts "7|8|9"
     end
 
-    # This method converts the input from the user into a zero-indexed number
+    # This method converts the input from the user into a zero-indexed number and adds the shape of the current player into the specific position on the cells array
    
     def player_choice(choice = gets.chomp.to_i)
       puts "#{@current_player.name}'s turn: Pick a cell number from the map"
@@ -63,26 +63,31 @@ end
      while cells[move] != " "
       raise "This cell has been chosen, Please select another cell"
       player_choice
-    end
-    @current_player.cells_selected << move
+     end
+    updates_player_cells(move)
     @cells[move] = @current_player.shape
-     
-   end
+    end
+
+    def updates_player_cells(position)
+      @current_player.cells_selected << position
+    end
+ 
+
 
 
 #  This method checks whether or not there is a winner or the game is a draw
-    def check_end_game
+    def check_end_game(current_player_cells, player1_cell, player2_cell)
       
       winning_condition = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
       winning_condition.each do |condition|
-        if (condition - @current_player.cells_selected).empty?
+        if (condition - current_player_cells).empty?
             puts "#{@current_player.name} wins"
             @end_game = true
             return @end_game
         end
         
       end
-      if ((@player1.cells_selected.length + @player2.cells_selected.length) == 9)
+      if ((player1_cell.length + player2_cell.length) == 9)
 
         puts "It's a draw!"
         @end_game = true
